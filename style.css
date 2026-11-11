@@ -1,7 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+@font-face {
+    font-family: 'Redaction 35';
+    src: url('fonts/Redaction35-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Redaction 35';
+    src: url('fonts/Redaction35-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Redaction 35';
+    src: url('fonts/Redaction35-Italic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
 
 :root {
     color-scheme: dark;
+    --secondary: 'Instrument Serif', Georgia, serif;
+    --secondary: 'Redaction 35', Georgia, serif;
     --bg: #0a0a0a;
     --text: #f2f2f2;
     --muted: #9b9b9b;
@@ -312,3 +340,259 @@ footer {
     box-shadow: 7px 7px 0 var(--green-num);
 }
 .semester-card.active span { color: var(--green); }
+
+
+
+/* Secondary text */
+.hero p,
+.semester-card p,
+.paper-list p,
+.about-text,
+footer {
+    font-family: var(--secondary);
+}
+
+.hero p { font-size: clamp(22px, 2.4vw, 30px); }
+.semester-card p { font-size: 18px; }
+.about-text { font-size: 22px; }
+footer { font-size: 18px; }
+
+/* Keep the small green labels in mono */
+.hero > p:first-child:not(:only-of-type) {
+    font-family: var(--mono);
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   PYQ page only  (everything below is scoped to .pyq-page)
+   ===================================================== */
+
+/* Total paper count, top right of the intro */
+.pyq-page .hero { position: relative; }
+
+.pyq-page .pyq-total {
+    position: absolute;
+    right: 0;
+    bottom: 35px;
+    text-align: right;
+}
+
+.pyq-page .pyq-total strong {
+    display: block;
+    font-family: var(--display);
+    font-size: clamp(44px, 6vw, 72px);
+    line-height: 1;
+    color: var(--green-num);
+}
+
+.pyq-page .pyq-total span {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--muted);
+}
+
+/* Subject cards: name on the left, count + arrow on the right */
+.pyq-page #subject-list button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.pyq-page .pyq-count {
+    flex-shrink: 0;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: var(--muted);
+    white-space: nowrap;
+}
+
+.pyq-page #subject-list button.active .pyq-count { color: var(--green); }
+
+.pyq-page .pyq-empty {
+    grid-column: 1 / -1;
+    color: var(--muted);
+}
+
+/* Paper panel */
+.pyq-page .paper-list { display: block; }
+
+.pyq-page .pyq-panel {
+    padding: 24px 26px 28px;
+    background: var(--bg);
+    border: 1.5px solid var(--text);
+    box-shadow: 7px 7px 0 var(--green);
+}
+
+.pyq-page .pyq-panel-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+}
+
+.pyq-page .pyq-panel-head h3 {
+    font-size: 26px;
+    letter-spacing: -0.02em;
+}
+
+.pyq-page .pyq-panel-head span {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--muted);
+}
+
+/* Year groups (collapsible) */
+.pyq-page .pyq-year { margin-top: 26px; }
+
+.pyq-page .pyq-year summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, .18);
+    color: var(--green-num);
+    font-size: 14px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    list-style: none;
+}
+
+.pyq-page .pyq-year summary::-webkit-details-marker { display: none; }
+
+.pyq-page .pyq-year summary::after {
+    content: "−";
+    margin-left: 14px;
+}
+
+.pyq-page .pyq-year:not([open]) summary::after { content: "+"; }
+
+.pyq-page .pyq-year-count {
+    margin-left: auto;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: var(--muted);
+}
+
+.pyq-page .pyq-rows {
+    display: grid;
+    gap: 16px;
+    margin-top: 18px;
+}
+
+/* Paper rows reuse the existing .paper-list button look */
+.pyq-page .paper-list button.pyq-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    width: 100%;
+}
+
+.pyq-page .paper-list button.pyq-row.active {
+    border-color: var(--green);
+    color: var(--green);
+    box-shadow: 4px 4px 0 var(--green);
+}
+
+.pyq-page .pyq-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pyq-page .pyq-type {
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.pyq-page .pyq-pdf {
+    padding: 2px 8px;
+    border: 1px solid currentColor;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+@media (max-width: 900px) {
+    .pyq-page .pyq-total {
+        position: static;
+        margin-top: 24px;
+        text-align: left;
+    }
+}
+
+@media (max-width: 650px) {
+    .pyq-page .pyq-panel { padding: 18px 16px 22px; }
+}
+/* ===== Calmer subject cards (syllabus + PYQ) ===== */
+
+.subject-list,
+#subject-list {
+    gap: 26px;
+    counter-reset: subject;
+}
+
+.subject-list button,
+#subject-list button {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    min-height: 84px;
+    padding: 20px 24px;
+
+    border-color: #4d4d4d;
+    box-shadow: 4px 4px 0 #262626;
+
+    font-family: var(--mono);
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.35;
+    counter-increment: subject;
+}
+
+/* Index number: syllabus page only */
+.subject-section .subject-list button::before {
+    content: counter(subject, decimal-leading-zero);
+    flex-shrink: 0;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: var(--green);
+}
+
+/* Index number: PYQ page only, in front of the name */
+.pyq-page #subject-list button > span:first-child::before {
+    content: counter(subject, decimal-leading-zero);
+    margin-right: 18px;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: var(--green);
+}
+
+.pyq-page .pyq-count {
+    font-family: var(--mono);
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 650px) {
+    .subject-list,
+    #subject-list { gap: 20px; }
+
+    .subject-list button,
+    #subject-list button {
+        min-height: 72px;
+        padding: 16px 18px;
+        font-size: 16px;
+    }
+}

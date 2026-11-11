@@ -21,6 +21,10 @@ subjectButtons.forEach(function(button) {
 
         downloadButton.hidden = false;
 
+        // Jump to the PDF viewer
+        document.querySelector(".pdf-section").scrollIntoView({ behavior: "smooth", block: "start" });
+
+
     });
 
 });

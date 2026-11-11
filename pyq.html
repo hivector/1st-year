@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="pyq-page">
 
     <header class="topbar">
         <a href="index.html">Home</a>
@@ -23,9 +23,13 @@
     <main>
 
         <section class="hero">
-            <p>EXAMINATION ARCHIVE</p>
-            <h2>Previous year<br><span class="accent">questions.</span></h2>
-            <p>Find and practise from previous examination papers.</p>
+            <p>QUESTION PAPER ARCHIVE</p>
+            <h2>Previous year<br><span class="accent">papers.</span></h2>
+            <p>Browse past examination papers by subject and year.</p>
+            <div class="pyq-total">
+                <strong id="total-papers">0</strong>
+                <span>PAPERS AVAILABLE</span>
+            </div>
         </section>
 
         <section class="pyq-section">
@@ -35,7 +39,7 @@
             <input
                 type="text"
                 id="search-input"
-                placeholder="Search subjects or examination year..."
+                placeholder="Search subjects, papers or years..."
             >
 
             <div id="subject-list" class="subject-list">
