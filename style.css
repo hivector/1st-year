@@ -596,3 +596,17 @@ footer { font-size: 18px; }
         font-size: 16px;
     }
 }
+
+.pyq-page .paper-list button.pyq-zip {
+    padding: 8px 14px;
+    border-color: var(--green);
+    box-shadow: 3px 3px 0 var(--green);
+    color: var(--green);
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.pyq-page .paper-list button.pyq-zip:disabled {
+    opacity: .6;
+    cursor: wait;
+}

@@ -296,6 +296,16 @@ function displayPapers() {
 
     head.appendChild(title);
     head.appendChild(count);
+
+if (typeof JSZip !== "undefined") {
+    const zipButton = document.createElement("button");
+    zipButton.className = "pyq-zip";
+    zipButton.textContent = "Download all (ZIP) ↓";
+    zipButton.addEventListener("click", function() {
+        downloadSubjectZip(selectedSubject, zipButton);
+    });
+    head.appendChild(zipButton);
+}
     panel.appendChild(head);
 
     if (matches.length === 0) {
@@ -402,7 +412,53 @@ function displayPapers() {
 
 }
 
+// Download every paper of a subject as one ZIP
+function downloadSubjectZip(subject, button) {
 
+    const entries = library[subject];
+    const originalText = button.textContent;
+    const zip = new JSZip();
+    let done = 0;
+
+    button.disabled = true;
+    button.textContent = "Preparing 0/" + entries.length;
+
+    Promise.all(entries.map(function(entry) {
+
+        return fetch(encodeURI(entry.path))
+            .then(function(response) {
+                if (!response.ok) throw new Error("Missing: " + entry.path);
+                return response.blob();
+            })
+            .then(function(blob) {
+                const name = subject + " - " + entry.label.replace(/[^\w ]+/g, "-") + ".pdf";
+                zip.file(name, blob);
+                done++;
+                button.textContent = "Preparing " + done + "/" + entries.length;
+            });
+
+    }))
+    .then(function() {
+        return zip.generateAsync({ type: "blob" });
+    })
+    .then(function(blob) {
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = slugify(subject) + "-pyq.zip";
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(link.href);
+    })
+    .catch(function() {
+        alert("Could not build the ZIP. Check your connection and try again.");
+    })
+    .finally(function() {
+        button.disabled = false;
+        button.textContent = originalText;
+    });
+
+}
 
 function selectSubject(subject) {
 
