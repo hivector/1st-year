@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Previous Year Questions | SATI Archive</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <a href="index.html" class="site-logo">
+            <h1>First Year</h1>
+            <p>Academic Archive</p>
+        </a>
+    </header>
+
+    <main>
+
+        <section class="hero">
+            <p>EXAMINATION ARCHIVE</p>
+            <h2>Previous year questions.</h2>
+            <p>Find and practise from previous examination papers.</p>
+        </section>
+
+        <section class="pyq-section">
+
+            <h2>Explore Question Papers</h2>
+
+            <input
+                type="text"
+                id="search-input"
+                placeholder="Search subjects or examination year..."
+            >
+
+            <div id="subject-list" class="subject-list">
+                <!-- Subjects will be added using JavaScript -->
+            </div>
+
+            <div id="paper-list" class="paper-list">
+                <p>Select a subject to view available papers.</p>
+            </div>
+
+        </section>
+
+        <section class="pdf-section">
+
+            <div class="pdf-heading">
+
+                <div>
+                    <p>DOCUMENT VIEWER</p>
+                    <h2 id="pdf-title">Select a question paper</h2>
+                </div>
+
+                <a id="download-pdf" href="#" download hidden>
+                    Download PDF ↓
+                </a>
+
+            </div>
+
+            <iframe
+                id="pdf-viewer"
+                title="Question Paper Viewer">
+            </iframe>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Made for students, by students.</p>
+    </footer>
+
+    <script src="pyq.js"></script>
+
+</body>
+</html>
+

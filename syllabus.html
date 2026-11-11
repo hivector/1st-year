@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Syllabus | SATI Archive</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <a href="index.html" class="site-logo">
+            <h1>First Year</h1>
+            <p>Academic Archive</p>
+        </a>
+    </header>
+
+    <main>
+
+        <section class="hero">
+            <p>ACADEMIC RESOURCES</p>
+            <h2>Explore the syllabus.</h2>
+            <p>Find your semester and access subject materials.</p>
+        </section>
+
+        <section class="semesters">
+
+            <h2>Select Semester</h2>
+
+            <div class="semester-container">
+
+                <a href="#semester-one" class="semester-card">
+                    <span>01</span>
+                    <h3>Semester One</h3>
+                    <p>First semester subjects.</p>
+                </a>
+
+                <a href="#semester-two" class="semester-card">
+                    <span>02</span>
+                    <h3>Semester Two</h3>
+                    <p>Second semester subjects.</p>
+                </a>
+
+            </div>
+
+        </section>
+
+        <section id="semester-one" class="subject-section">
+
+            <h2>Semester One</h2>
+
+            <div class="subject-list">
+
+                <button data-pdf="syllabus/sem 1/Computer Workshop.pdf">
+                    Computer Workshop
+                </button>
+
+                <button data-pdf="syllabus/sem 1/applied chem.pdf">
+                    Applied Chemistry
+                </button>
+
+                <button data-pdf="syllabus/sem 1/Linear Algebra and Calculus.pdf">
+                    Linear Algebra and Calculus
+                </button>
+
+                <button data-pdf="syllabus/sem 1/Fundamentals Of Mechanical Engineering.pdf">
+                    Fundamentals of Mechanical Engineering
+                </button>
+
+                <button data-pdf="syllabus/sem 1/Computer Workshop Linux.pdf">
+                    Computer Workshop Linux
+                </button>
+
+                <button data-pdf="syllabus/sem 1/Linux Lab.pdf">
+                    Linux Lab
+                </button>
+
+                <button data-pdf="syllabus/sem 1/Fundamentals Of Electronics Engineering.pdf">
+                    Fundamentals of Electronics Engineering
+                </button>
+
+                <button data-pdf="syllabus/sem 1/Fundamentals ofComputer Science and Engineering.pdf">
+                    Fundamentals of Computer Science and Engineering
+                </button>
+
+            </div>
+
+        </section>
+
+        <section id="semester-two" class="subject-section">
+
+            <h2>Semester Two</h2>
+
+            <div class="subject-list">
+
+                <button data-pdf="syllabus/sem 2/Advance Programmin.pdf">
+                    Advanced Programming
+                </button>
+
+                <button data-pdf="syllabus/sem 2/Workshop Practice.pdf">
+                    Workshop Practice
+                </button>
+
+                <button data-pdf="syllabus/sem 2/OOP.pdf">
+                    Object Oriented Programming
+                </button>
+
+                <button data-pdf="syllabus/sem 2/M2.pdf">
+                    Mathematics II
+                </button>
+
+                <button data-pdf="syllabus/sem 2/Interactive Presentation Skills.pdf">
+                    Interactive Presentation Skills
+                </button>
+
+                <button data-pdf="syllabus/sem 2/Universal Human Values.pdf">
+                    Universal Human Values
+                </button>
+
+            </div>
+
+        </section>
+
+        <section class="pdf-section">
+
+            <div class="pdf-heading">
+                <div>
+                    <p>DOCUMENT VIEWER</p>
+                    <h2 id="pdf-title">Select a subject</h2>
+                </div>
+
+                <a id="download-pdf" href="#" download hidden>
+                    Download PDF ↓
+                </a>
+            </div>
+
+            <iframe
+                id="pdf-viewer"
+                title="Syllabus PDF Viewer">
+            </iframe>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Made for students, by students.</p>
+    </footer>
+
+    <script src="syllabus.js"></script>
+
+</body>
+</html>
+
