@@ -297,15 +297,21 @@ function displayPapers() {
     head.appendChild(title);
     head.appendChild(count);
 
-if (typeof JSZip !== "undefined") {
-    const zipButton = document.createElement("button");
-    zipButton.className = "pyq-zip";
-    zipButton.textContent = "Download all (ZIP) ↓";
-    zipButton.addEventListener("click", function() {
-        downloadSubjectZip(selectedSubject, zipButton);
-    });
-    head.appendChild(zipButton);
-}
+    // ZIP button: downloads a pre-built zip (made by make_zips.py)
+    if (library[selectedSubject].length > 1) {
+
+        const zipButton = document.createElement("button");
+        zipButton.className = "pyq-zip";
+        zipButton.textContent = "Download all (ZIP) ↓";
+
+        zipButton.addEventListener("click", function() {
+            window.location.href = "pyq/zips/" + slugify(selectedSubject) + ".zip";
+        });
+
+        head.appendChild(zipButton);
+
+    }
+
     panel.appendChild(head);
 
     if (matches.length === 0) {
@@ -378,17 +384,17 @@ if (typeof JSZip !== "undefined") {
             row.appendChild(when);
             row.appendChild(meta);
 
-            // Same PDF behaviour as before
+            // Open the paper in the viewer
             row.addEventListener("click", function() {
 
                 const pdfPath = encodeURI(entry.path);
 
                 pdfViewer.src = pdfPath;
-                pdfTitle.textContent = entry.fileName.replace(".pdf", "");
+                pdfTitle.textContent = entry.fileName.replace(/\.pdf(\.pdf)?$/i, "");
                 downloadButton.href = pdfPath;
                 downloadButton.hidden = false;
 
-                    // Jump to the PDF viewer
+                // Jump to the PDF viewer
                 document.querySelector(".pdf-section").scrollIntoView({ behavior: "smooth", block: "start" });
 
                 selectedPath = entry.path;
@@ -412,58 +418,12 @@ if (typeof JSZip !== "undefined") {
 
 }
 
-// Download every paper of a subject as one ZIP
-function downloadSubjectZip(subject, button) {
-
-    const entries = library[subject];
-    const originalText = button.textContent;
-    const zip = new JSZip();
-    let done = 0;
-
-    button.disabled = true;
-    button.textContent = "Preparing 0/" + entries.length;
-
-    Promise.all(entries.map(function(entry) {
-
-        return fetch(encodeURI(entry.path))
-            .then(function(response) {
-                if (!response.ok) throw new Error("Missing: " + entry.path);
-                return response.blob();
-            })
-            .then(function(blob) {
-                const name = subject + " - " + entry.label.replace(/[^\w ]+/g, "-") + ".pdf";
-                zip.file(name, blob);
-                done++;
-                button.textContent = "Preparing " + done + "/" + entries.length;
-            });
-
-    }))
-    .then(function() {
-        return zip.generateAsync({ type: "blob" });
-    })
-    .then(function(blob) {
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = slugify(subject) + "-pyq.zip";
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-        URL.revokeObjectURL(link.href);
-    })
-    .catch(function() {
-        alert("Could not build the ZIP. Check your connection and try again.");
-    })
-    .finally(function() {
-        button.disabled = false;
-        button.textContent = originalText;
-    });
-
-}
 
 function selectSubject(subject) {
 
     selectedSubject = subject;
 
+    // Shareable link, e.g. pyq.html#linear-algebra-and-calculus
     try {
         history.replaceState(null, "", "#" + slugify(subject));
     } catch (error) {
