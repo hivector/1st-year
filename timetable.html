@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+
+    <title>Timetable | SATI Archive</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="timetable-page">
+
+    <header class="topbar">
+        <a href="index.html">Home</a>
+        <a href="syllabus.html">Syllabus</a>
+        <a href="pyq.html">PYQs</a>
+        <a href="exams.html">Essentials</a>
+        <a href="timetable.html" class="active">Timetable</a>
+        <a href="about.html">About</a>
+    </header>
+
+    <main>
+
+        <section class="hero">
+            <p>CLASS SCHEDULE</p>
+            <h2>Find your<br><span class="accent">timetable.</span></h2>
+            <p>Pick your branch to see its class timetable.</p>
+        </section>
+
+        <section class="branches">
+
+            <h2>Select Branch</h2>
+
+            <div id="branch-list" class="branch-tabs">
+                <!-- Branches are added by timetable.js -->
+            </div>
+
+        </section>
+
+        <section class="pdf-section">
+
+            <div class="pdf-heading">
+                <div>
+                    <p>DOCUMENT VIEWER</p>
+                    <h2 id="pdf-title">Select a branch</h2>
+                </div>
+
+                <a id="download-pdf" href="#" download hidden>
+                    Download PDF ↓
+                </a>
+            </div>
+
+            <iframe
+                id="pdf-viewer"
+                title="Timetable Viewer">
+            </iframe>
+
+        </section>
+
+    </main>
+
+    <script src="timetable.js"></script>
+
+</body>
+</html>

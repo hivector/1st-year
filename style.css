@@ -28,8 +28,7 @@
 
 :root {
     color-scheme: dark;
-    --secondary: 'Instrument Serif', Georgia, serif;
-    --secondary: 'Redaction 35', Georgia, serif;
+    --secondary: var(--mono);
     --bg: #0a0a0a;
     --text: #f2f2f2;
     --muted: #9b9b9b;
@@ -110,7 +109,7 @@ main {
 .hero h2 {
     font-size: clamp(52px, 9.2vw, 118px);
     font-weight: 800;
-    line-height: .92;
+    line-height: 1.02;
     letter-spacing: -0.05em;
     margin-bottom: 34px;
     color: #f4f4f4;
@@ -609,4 +608,56 @@ footer { font-size: 18px; }
 .pyq-page .paper-list button.pyq-zip:disabled {
     opacity: .6;
     cursor: wait;
+}
+
+@media (max-width: 650px) {
+    .topbar { flex-wrap: wrap; justify-content: center; }
+    .topbar a { padding: 14px 10px 10px; font-size: 13px; }
+}
+
+/* Timetable page only */
+
+.timetable-page .branches { margin-bottom: 40px; }
+
+.timetable-page .branches h2 {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 22px;
+}
+
+.timetable-page .branch-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.timetable-page .branch-tabs button {
+    padding: 12px 22px;
+    background: var(--bg);
+    border: 1.5px solid #4d4d4d;
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 14px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: border-color .15s, color .15s, box-shadow .15s, transform .15s;
+}
+
+.timetable-page .branch-tabs button:hover {
+    border-color: var(--green);
+    color: var(--green);
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 var(--green);
+}
+
+.timetable-page .branch-tabs button.active {
+    border-color: var(--green);
+    color: var(--green);
+    box-shadow: 3px 3px 0 var(--green);
+}
+
+@media (max-width: 650px) {
+    .timetable-page .branch-tabs { gap: 10px; }
+    .timetable-page .branch-tabs button { padding: 10px 14px; font-size: 13px; }
 }
