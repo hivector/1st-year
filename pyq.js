@@ -457,3 +457,7 @@ for (let subject in library) {
 
 displaySubjects();
 displayPapers();
+
+if (selectedSubject) {
+    paperList.scrollIntoView({ behavior: "smooth", block: "start" });
+}
