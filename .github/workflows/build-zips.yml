@@ -1,0 +1,41 @@
+name: Build subject ZIPs
+
+# Rebuilds pyq/zips/ whenever a paper or the paper list changes,
+# so the "Download all (ZIP)" files can never go out of date.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "pyq/*.pdf"
+      - "pyq/**/*.pdf"
+      - "pyq.js"
+      - "make_zips.py"
+
+permissions:
+  contents: write
+
+jobs:
+  zips:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Build ZIPs
+        run: python make_zips.py
+
+      - name: Commit updated ZIPs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pyq/zips
+          if git diff --cached --quiet; then
+            echo "ZIPs already up to date"
+          else
+            git commit -m "Rebuild subject ZIPs"
+            git push
+          fi
